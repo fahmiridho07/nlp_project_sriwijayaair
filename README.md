@@ -7,7 +7,7 @@ Hasil akhir dari pipeline ini adalah **Sentiment Analysis**, untuk memahami pers
 
 ## 🚀 Project Roadmap
 
-![NLP Pipeline](docs/nlp_pipeline.png)
+![NLP Pipeline](assets/pipeline.png)
 
 ### 1. Data Collection
 - Menggunakan library `google_play_scraper` untuk mengambil ulasan aplikasi **Sriwijaya Air Mobile** dari Google Play Store.

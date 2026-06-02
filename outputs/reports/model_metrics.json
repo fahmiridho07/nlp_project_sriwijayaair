@@ -1,0 +1,29 @@
+[
+  {
+    "model":"logistic_regression",
+    "accuracy":0.8522727273,
+    "macro_f1":0.6362601358,
+    "weighted_f1":0.845003502,
+    "negative_f1":0.8787878788,
+    "neutral_f1":0.1481481481,
+    "positive_f1":0.8818443804
+  },
+  {
+    "model":"linear_svm",
+    "accuracy":0.8409090909,
+    "macro_f1":0.630597771,
+    "weighted_f1":0.8318886433,
+    "negative_f1":0.8632218845,
+    "neutral_f1":0.16,
+    "positive_f1":0.8685714286
+  },
+  {
+    "model":"naive_bayes",
+    "accuracy":0.8181818182,
+    "macro_f1":0.6082828693,
+    "weighted_f1":0.830355036,
+    "negative_f1":0.8679245283,
+    "neutral_f1":0.0888888889,
+    "positive_f1":0.8680351906
+  }
+]

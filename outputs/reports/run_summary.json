@@ -1,0 +1,40 @@
+{
+  "input_file": "C:\\Users\\Lenovo\\Documents\\3_College\\PBA\\nlp_project_sriwijayaair\\week02_dataprocessing\\SriwijayaAir_Preprocessed.csv",
+  "rows_used": 1756,
+  "test_size": 0.2,
+  "random_state": 42,
+  "label_mapping": {
+    "1-2": "negative",
+    "3": "neutral",
+    "4-5": "positive"
+  },
+  "class_distribution": {
+    "negative": 806,
+    "neutral": 87,
+    "positive": 863
+  },
+  "feature_engineering": {
+    "text": "TF-IDF with unigram, bigram, and trigram features",
+    "numeric": [
+      "word_count",
+      "char_count",
+      "avg_word_length"
+    ],
+    "training_balance": "Random oversampling is applied to the training split only.",
+    "exploration_tables": [
+      "top_bow_terms.csv",
+      "top_ngram_terms.csv",
+      "top_tfidf_terms.csv",
+      "top_terms_by_sentiment.csv"
+    ]
+  },
+  "best_model": "logistic_regression",
+  "best_metrics": {
+    "accuracy": 0.8522727272727273,
+    "macro_f1": 0.6362601357798283,
+    "weighted_f1": 0.8450035019657759,
+    "negative_f1": 0.8787878787878788,
+    "neutral_f1": 0.14814814814814814,
+    "positive_f1": 0.8818443804034583
+  }
+}

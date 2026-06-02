@@ -1,0 +1,9 @@
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.5
+matplotlib>=3.8
+joblib>=1.4
+google-play-scraper>=1.2
+nltk>=3.9
+Sastrawi>=1.0.1
+textblob>=0.18

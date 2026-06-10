@@ -164,9 +164,9 @@ Jalankan dari root project:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\activate
+.\\.venv\\Scripts\\activate
 pip install -r requirements.txt
-python src\sentiment_pipeline.py
+python src\\sentiment_pipeline.py
 ```
 
 Setelah pipeline selesai, hasil akan tersimpan di:
@@ -201,5 +201,5 @@ Beberapa pengembangan lanjutan yang bisa dilakukan:
 
 **Achmad Fahmi Ainur Ridho**  
 Information Systems, Institut Teknologi Sepuluh Nopember (ITS)  
-LinkedIn: <https://www.linkedin.com/fahmiridho>  
+LinkedIn: <https://www.linkedin.com/in/fahmiridho>  
 GitHub: <https://github.com/fahmiridho07>

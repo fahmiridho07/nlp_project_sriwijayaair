@@ -1,6 +1,8 @@
 # Sentiment Analysis Sriwijaya Air Mobile App Reviews
 
-Project Natural Language Processing (NLP) untuk menganalisis sentimen ulasan pengguna aplikasi **Sriwijaya Air Mobile** di Google Play Store. Repo ini disusun sebagai end-to-end portfolio project: mulai dari data review, preprocessing, feature engineering, modeling, evaluasi, visualisasi, hingga penyimpanan model terbaik.
+**EN** — An end-to-end Indonesian NLP pipeline classifying 1,756 Google Play reviews of the Sriwijaya Air Mobile app into three sentiment classes (negative / neutral / positive). Covers scraping, bilingual preprocessing, TF-IDF n-gram features, a comparison of Logistic Regression, Linear SVM, and Naive Bayes (best: LogReg, 0.852 accuracy / 0.636 macro F1 on a held-out split), honest error analysis of the weak neutral class, a rule-based complaint taxonomy over negative reviews, a model card, and a Streamlit inference demo. Full case study: [fahmiridho.me/projects/sriwijayaair-review-sentiment](https://fahmiridho.me/projects/sriwijayaair-review-sentiment/). The rest of this README is in Indonesian.
+
+**ID** — Project Natural Language Processing (NLP) untuk menganalisis sentimen ulasan pengguna aplikasi **Sriwijaya Air Mobile** di Google Play Store. Repo ini disusun sebagai end-to-end portfolio project: mulai dari data review, preprocessing, feature engineering, modeling, evaluasi, visualisasi, hingga penyimpanan model terbaik.
 
 ![NLP Pipeline](assets/pipeline.png)
 
@@ -122,8 +124,57 @@ Visual tambahan untuk website portfolio tersedia di `outputs/portfolio/`. Folder
 - `05_user_pain_points.png` - kata/isu yang paling sering muncul di review negatif
 - `06_sentiment_trend_by_month.png` - tren sentimen berdasarkan waktu review
 - `07_review_examples.png` - contoh review dan prediksi model
+- `08_negative_aspect_insight.png` - kategori keluhan utama dari review negatif
+- `09_error_analysis_evidence.png` - pola kesalahan model pada held-out test set
 
 Panduan urutan tampilan dan copy singkat untuk website ada di `outputs/portfolio/README.md`.
+
+## Business Insight
+
+Selain klasifikasi sentimen, project ini juga mengekstrak **aspect insight** dari review negatif menggunakan rule-based keyword taxonomy. Tujuannya adalah mengubah output model menjadi insight produk yang lebih mudah dipahami:
+
+- App performance: error, bug, loading, crash, lambat, aplikasi tidak bisa dibuka
+- Check-in: web check-in, boarding, airport, PSC, proses check-in
+- Ticketing and booking: tiket, booking, jadwal, penerbangan, rute
+- Promo and pricing: promo, diskon, voucher, harga
+- Login and account: login, register, akun, profil, password, KTP
+- Payment: pembayaran, invoice, transaksi, kartu kredit, ShopeePay
+- Member and travel pass: member, SJ Pass, travel pass, miles, poin
+- Customer service: call center, CS, pelayanan, layanan
+
+Output aspect analysis:
+
+- `outputs/reports/negative_aspect_summary.csv`
+- `outputs/reports/negative_aspect_examples.csv`
+- `outputs/reports/negative_aspect_insights.md`
+- `outputs/figures/negative_aspect_summary.png`
+
+## Error Analysis
+
+Pipeline menyimpan prediksi pada **held-out test set** agar error analysis tidak memakai data training. Ini membantu menjawab pertanyaan penting: *model salah di kasus seperti apa?*
+
+Output error analysis:
+
+- `outputs/reports/test_predictions_best_model.csv`
+- `outputs/reports/test_errors_best_model.csv`
+- `outputs/reports/error_type_summary.csv`
+- `outputs/reports/top_error_examples.csv`
+- `outputs/reports/error_analysis.md`
+- `outputs/figures/error_analysis_summary.png`
+
+Insight utama: kelas `neutral` adalah kelas tersulit karena rating 3 sering berisi campuran keluhan, saran, dan apresiasi ringan.
+
+## Model Card and Demo
+
+Dokumentasi model tersedia di `MODEL_CARD.md`. File ini menjelaskan intended use, data, label, fitur, performa, limitasi, dan rekomendasi pengembangan.
+
+Project ini juga menyediakan demo inference sederhana dengan Streamlit:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\run_streamlit_demo.ps1
+```
+
+Demo memungkinkan pengguna memasukkan review baru dan melihat prediksi sentimen beserta fitur teks sederhana yang dipakai untuk inferensi.
 
 ## Interpretation
 
@@ -140,9 +191,16 @@ Karena itu, weighted F1 tinggi, sementara macro F1 lebih rendah. Ini wajar pada 
 ```text
 .
 |-- README.md
+|-- MODEL_CARD.md
 |-- requirements.txt
+|-- app/
+|   `-- streamlit_app.py
+|-- scripts/
+|   `-- run_streamlit_demo.ps1
 |-- src/
 |   |-- __init__.py
+|   |-- insight_analysis.py
+|   |-- portfolio_evidence.py
 |   `-- sentiment_pipeline.py
 |-- assets/
 |   `-- pipeline.png
@@ -151,6 +209,7 @@ Karena itu, weighted F1 tinggi, sementara macro F1 lebih rendah. Ini wajar pada 
 |   `-- SriwijayaAir_Preprocessed.csv
 |-- outputs/
 |   |-- figures/
+|   |-- portfolio/
 |   |-- processed/
 |   `-- reports/
 |-- models/
@@ -166,7 +225,9 @@ Jalankan dari root project:
 python -m venv .venv
 .\\.venv\\Scripts\\activate
 pip install -r requirements.txt
-python src\\sentiment_pipeline.py
+python src\sentiment_pipeline.py
+python src\insight_analysis.py
+python src\portfolio_evidence.py
 ```
 
 Setelah pipeline selesai, hasil akan tersimpan di:
@@ -174,6 +235,7 @@ Setelah pipeline selesai, hasil akan tersimpan di:
 - `outputs/processed/`
 - `outputs/reports/`
 - `outputs/figures/`
+- `outputs/portfolio/`
 - `models/best_sentiment_model.joblib`
 
 ## Portfolio Highlights
